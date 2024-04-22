@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useMemo, useState } from "react";
 import { useTable, useSortBy, usePagination } from "react-table";
-const width = window.screen.width;
+
 export default function ReactTable({ tableColumns, tableData }) {
   const columns = useMemo(() => tableColumns, [tableColumns]);
   const data = useMemo(() => tableData, [tableData]);

@@ -6,7 +6,7 @@ import { Box, Button, Stack, Heading } from "@chakra-ui/react";
 
 import { CSVReader } from "react-papaparse";
 import ReactTable from "./components/ReactTable";
-const width = window.screen.width;
+
 export default function Home() {
   const buttonRef = useRef(null);
   const [showDownloadBtn, setShowDownloadBtn] = useState(false);
@@ -75,7 +75,6 @@ export default function Home() {
   return (
     <main
       style={{
-        width: width - width * 0.2,
         textAlign: "center",
         justifyContent: "center",
         alignItems: "center",
