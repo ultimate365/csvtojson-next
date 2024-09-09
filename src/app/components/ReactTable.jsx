@@ -101,9 +101,9 @@ export default function ReactTable({ tableColumns, tableData }) {
               value={pageNo}
               onChange={(e) => {
                 setPageNo(e.target.value);
-                gotoPage(e.target.value);
               }}
             />
+            <Button onClick={() => gotoPage(pageNo)}>Go</Button>
           </Flex>
           <Flex gap={20}>
             <Button onClick={nextPage}>Next Page</Button>
