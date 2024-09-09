@@ -5,6 +5,7 @@ import { Box, Button, Stack, Heading } from "@chakra-ui/react";
 
 import { CSVReader } from "react-papaparse";
 import ReactTable from "./ReactTable";
+import toast from "react-hot-toast";
 
 export default function Csv2JSON() {
   const buttonRef = useRef(null);
@@ -17,30 +18,35 @@ export default function Csv2JSON() {
   const rows = useMemo(() => rowsData, [rowsData]);
 
   const handleOnFileLoad = (data) => {
-    const columns = data[0].data.map((col, index) => {
-      return {
-        Header: col,
-        accessor: col.split(" ").join("_").toLowerCase(),
-      };
-    });
-    297019;
-    const rows = data.slice(1).map((row) => {
-      return row.data.reduce((acc, curr, index) => {
-        acc[columns[index].accessor] = curr;
-        return acc;
-      }, {});
-    });
-    const colD = data[0].data.map((col, index) => {
-      return {
-        name: col,
-      };
-    });
-    setColData(colD);
-    setRowsData(rows);
-    setColumData(columns);
-    let json = JSON.stringify(rows);
-    setJsonData(json);
-    setShowDownloadBtn(true);
+    try {
+      const columns = data[0].data.map((col, index) => {
+        return {
+          Header: col,
+          accessor: col.split(" ").join("_").toLowerCase(),
+        };
+      });
+      297019;
+      const rows = data.slice(1).map((row) => {
+        return row.data.reduce((acc, curr, index) => {
+          acc[columns[index].accessor] = curr;
+          return acc;
+        }, {});
+      });
+      const colD = data[0].data.map((col, index) => {
+        return {
+          name: col,
+        };
+      });
+      setColData(colD);
+      setRowsData(rows);
+      setColumData(columns);
+      let json = JSON.stringify(rows);
+      setJsonData(json);
+      setShowDownloadBtn(true);
+    } catch (error) {
+      toast.error("Error in File!");
+      console.log(error);
+    }
   };
   const downloadFile = (file) => {
     let blob = new Blob([jsonData], { type: "application/json" });
@@ -54,6 +60,7 @@ export default function Csv2JSON() {
   };
   const handleOnError = (err, file, inputElem, reason) => {
     console.log(err);
+    toast.error("Error in File!");
   };
 
   const handleOnRemoveFile = (data) => {
@@ -63,7 +70,7 @@ export default function Csv2JSON() {
     buttonRef.current.open(e);
   };
   return (
-    <div style={{ marginTop: 10 }}>
+    <div className="mt-5">
       <Heading color={"teal"} textAlign={"center"}>
         CSV to JSON Converter
       </Heading>
