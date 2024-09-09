@@ -1,8 +1,7 @@
 "use client";
 import React, { useState } from "react";
-
-import Csv2JSON from "./components/Csv2JSON";
-import JSON2Csv from "./components/JSON2Csv";
+import Csv2JSON from "./components/Csv2Json";
+import Json2Csv from "./components/Json2Csv";
 
 export default function Home() {
   const [csvToJSON, setCsvToJSON] = useState(true);
@@ -23,7 +22,7 @@ export default function Home() {
       >
         {csvToJSON ? "JSON to CSV" : "CSV to JSON"}
       </button>
-      {csvToJSON ? <Csv2JSON /> : <JSON2Csv />}
+      {csvToJSON ? <Csv2JSON /> : <Json2Csv />}
     </main>
   );
 }
